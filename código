@@ -1,0 +1,81 @@
+// Definir os pinos dos sensores analógicos
+const int sensor1 = A1;
+const int sensor2 = A2;
+const int sensor3 = A3;
+const int sensor4 = A4;
+const int sensor5 = A5;
+
+// Definir um valor limite para determinar detecção (ajustar conforme o sensor)
+const int limiar = 500; // Modifique este valor conforme necessário
+
+// Pinos da ponte H
+const int IN1 = 6;
+const int IN2 = 7;
+const int IN3 = 9;
+const int IN4 = 10;
+const int ENA = 5;
+const int ENB = 11;
+
+//velocidade máxima 
+const int velMax = 50;
+
+int detect1;
+int detect2;
+int detect3;
+int detect4;
+int detect5;
+
+
+void setup(){
+  // Inicializar o monitor serial
+  Serial.begin(9600);
+
+  // Cabeçalho da tabela
+  Serial.println("Sensor 1 | Sensor 2 | Sensor 3 | Sensor 4 | Sensor 5");
+  Serial.println("-----------------------------------------------");
+  
+  // Pinos dos sensores
+  pinMode(A1, INPUT);
+  pinMode(A2, INPUT);
+  pinMode(A3, INPUT);
+  pinMode(A4, INPUT);
+  pinMode(A5, INPUT);
+  
+  // Pinos da ponte H
+  pinMode(5, OUTPUT);
+  pinMode(6, OUTPUT);
+  pinMode(7, OUTPUT);
+  pinMode(9, OUTPUT);
+  pinMode(10, OUTPUT);
+  pinMode(11, OUTPUT);
+}
+
+void loop(){
+
+  // Ler os valores analógicos dos sensores
+  int sensorState1 = analogRead(sensor1);
+  int sensorState2 = analogRead(sensor2);
+  int sensorState3 = analogRead(sensor3);
+  int sensorState4 = analogRead(sensor4);
+  int sensorState5 = analogRead(sensor5);
+
+  // Verificar se o valor lido é maior que o limiar para determinar se algo foi detectado
+
+  int detect1 = (sensorState1 > limiar) ? 1 : 0;
+  int detect2 = (sensorState2 > limiar) ? 1 : 0;
+  int detect3 = (sensorState3 > limiar) ? 1 : 0;
+  int detect4 = (sensorState4 > limiar) ? 1 : 0;
+  int detect5 = (sensorState5 > limiar) ? 1 : 0;
+
+  // Imprimir os valores em uma única linha no formato de tabela
+  Serial.print("   ");
+  Serial.print(detect1); Serial.print("     |    ");
+  Serial.print(detect2); Serial.print("     |    ");
+  Serial.print(detect3); Serial.print("     |    ");
+  Serial.print(detect4); Serial.print("     |    ");
+  Serial.println(detect5);
+
+  // Pequeno delay para controlar a taxa de atualização do monitor serial
+  delay(500);
+
+}
