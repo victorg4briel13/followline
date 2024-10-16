@@ -19,6 +19,9 @@ const int ENB = 11;
 //velocidade máxima 
 const int velMax = 50;
 
+//cor da linha (linha preta = 0 e linha branca = 1)
+const int linha = 0;
+
 int detect1;
 int detect2;
 int detect3;
@@ -59,13 +62,26 @@ void loop(){
   int sensorState4 = analogRead(sensor4);
   int sensorState5 = analogRead(sensor5);
 
-  // Verificar se o valor lido é maior que o limiar para determinar se algo foi detectado
+  int detect1; 
+  int detect2;
+  int detect3; 
+  int detect4; 
+  int detect5; 
 
-  int detect1 = (sensorState1 > limiar) ? 1 : 0;
-  int detect2 = (sensorState2 > limiar) ? 1 : 0;
-  int detect3 = (sensorState3 > limiar) ? 1 : 0;
-  int detect4 = (sensorState4 > limiar) ? 1 : 0;
-  int detect5 = (sensorState5 > limiar) ? 1 : 0;
+  // Verificar se o valor lido é maior que o limiar para determinar se algo foi detectado
+  if(linha == 0){
+    detect1 = (sensorState1 > limiar) ? 1 : 0;
+    detect2 = (sensorState2 > limiar) ? 1 : 0;
+    detect3 = (sensorState3 > limiar) ? 1 : 0;
+    detect4 = (sensorState4 > limiar) ? 1 : 0;
+    detect5 = (sensorState5 > limiar) ? 1 : 0;
+  }else{
+    detect1 = (sensorState1 > limiar) ? 0 : 1;
+    detect2 = (sensorState2 > limiar) ? 0 : 1;
+    detect3 = (sensorState3 > limiar) ? 0 : 1;
+    detect4 = (sensorState4 > limiar) ? 0 : 1;
+    detect5 = (sensorState5 > limiar) ? 0 : 1;
+  }
 
   // Imprimir os valores em uma única linha no formato de tabela
   Serial.print("   ");
@@ -79,3 +95,13 @@ void loop(){
   delay(500);
 
 }
+
+void rodaE(int sentido, int velocidade){
+
+}
+
+void rodaD(int sentido, int velocidade){
+
+}
+
+
